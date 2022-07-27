@@ -15,6 +15,8 @@ plugins {
 dependencies {
     implementation platform('org.jetbrains.kotlin:kotlin-bom')
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    implementation 'com.android.tools.build:gradle:3.6.1'
+    implementation 'com.android.tools.build:transform-api:1.5.0'
 }
 
 gradlePlugin {
@@ -24,12 +26,16 @@ gradlePlugin {
             id = 'DemoPlugin'
             implementationClass = 'guru.ioio.aop.plugin.DemoPlugin'
         }
+        aop {
+            id = 'AopPlugin'
+            implementationClass = 'guru.ioio.aop.plugin.AopPlugin'
+        }
     }
 }
 
 publishing {
     publications {
-        demo(MavenPublication) {
+        maven(MavenPublication) {
             groupId = 'guru.ioio'
             artifactId = 'plugin-demo'
             version = '1.0.0'

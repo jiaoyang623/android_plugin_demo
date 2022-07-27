@@ -3,19 +3,23 @@
  */
 package guru.ioio.aop.plugin
 
-import org.gradle.api.Project
+import com.android.build.gradle.AppExtension
+import com.android.build.gradle.AppPlugin
 import org.gradle.api.Plugin
+import org.gradle.api.Project
 
 /**
  * A simple 'hello world' plugin.
  */
-class AopPlugin: Plugin<Project> {
+class AopPlugin : Plugin<Project> {
     override fun apply(project: Project) {
-        // Register a task
-//        project.tasks.register("demo") { task ->
-//            task.doLast {
-//                println("Hello from plugin 'guru.ioio.aop.plugin.greeting'")
-//            }
-//        }
+        println("***AopPlugin init***")
+
+        if (project.plugins.hasPlugin(AppPlugin::class.java)) {
+            project.extensions.getByType(AppExtension::class.java)
+                .registerTransform(AopTransform(project))
+        }
     }
+
+
 }
